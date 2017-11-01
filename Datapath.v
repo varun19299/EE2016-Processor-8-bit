@@ -45,6 +45,7 @@ module Datapath_Unit(
 
 // Read Instruction
  always @(posedge clk)
+
  begin
    pc_current <= pc_next;
  end
@@ -73,6 +74,7 @@ module Datapath_Unit(
   .reg_read_addr_2(reg_read_addr_2),
   .reg_read_data_2(reg_read_data_2)
  );
+
  // immediate extend
  assign ext_im = {{10{instr[5]}},instr[5:0]};   //record offset for load and store. The
  // ALU control unit

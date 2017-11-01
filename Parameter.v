@@ -10,6 +10,8 @@
 `define row_d 8 // The number of data registers in data memory.
 //We only use 8 data. Do not change this number.
 // Please only change the value of each data inside test.data file. Total number is fixed at 8.
-`define filename "./test/1_11_17_16_44.o"
+`define filename "./demo/1_11_17_16_44.o"
 `define simulation_time #300
+`define data_file "./demo/data.txt"
+`define program_file "./demo/prog.txt"
 `endif
