@@ -28,8 +28,8 @@ end
 
 always @(*)
 begin
+ $monitor(f,"time = %d\n", $time,"\n Opcode = %d\n",opcode);
 
-$monitor(f,"time = %d\n", $time,"\n Opcode = %d\n",opcode);
 
  case(opcode)
  4'b0000:  // LW
