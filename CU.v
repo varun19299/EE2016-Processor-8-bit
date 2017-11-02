@@ -28,7 +28,7 @@ end
 
 always @(*)
 begin
- $monitor(f,"time = %d\n", $time,"\n Opcode = %d\n",opcode);
+ $fmonitor(f,"time = %d\n", $time,"\n Opcode = %d\n",opcode);
 
 
  case(opcode)

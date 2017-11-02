@@ -41,7 +41,7 @@ initial
  end
 
  always @(posedge clk) begin
-  $monitor(f, "time = %d\n", $time,
+  $fmonitor(f, "time = %d\n", $time,
   "\tmemory[0] = %b\n", memory[0],
   "\tmemory[1] = %b\n", memory[1],
   "\tmemory[2] = %b\n", memory[2],
