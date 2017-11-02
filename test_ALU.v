@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 /*
-Testbench for RISC module
+Testbench for ALU module
 */
 `include "Parameter.v"
 `include "ALU.v"

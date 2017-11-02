@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 
 /*
-Testbench for RISC module
+Testbench for CU module
 */
 `include "Parameter.v"
 `include "CU.v"
 
-module test_ALU;
+module test_CU;
 
  // Inputs
  reg [3:0] opcode;

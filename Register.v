@@ -48,7 +48,7 @@ module GPRs( //general purpose register
 
  always @ (posedge clk ) begin
  //output registers
- $fmonitor(f,"time = %d\n", $time,
+ $monitor(f,"time = %d\n", $time,
  "\treg[0] = %b\n", reg_array[0],
  "\treg[1] = %b\n", reg_array[1],
  "\treg[2] = %b\n", reg_array[2],

@@ -1,82 +1,70 @@
 `timescale 1ns / 1ps
 
 /*
-Testbench for RISC module
+Testbench for ALU_Control module
 */
 `include "Parameter.v"
 `include "ALU_control.v"
 
 module test_ALU_Control;
 
- // Inputs
+ // Inputs and Outputs
+ wire [2:0] ALU_Cnt;
+ reg [1:0] ALUOp;
  reg [3:0] Opcode;
- wire [1:0] alu_op;
- wire jump,beq,bne,mem_read,mem_write,alu_src,reg_dst,mem_to_reg,reg_write;
-
 
  // Instantiate the Unit Under Test (UUT)
- Control_Unit uut (opcode,alu_op,jump,beq,bne,mem_read,mem_write,
-   alu_src,reg_dst,mem_to_reg,reg_write);
+ alu_control uut (ALU_Cnt,ALUOp,Opcode);
 
  initial
   begin
 
-  $dumpfile("./Waveforms/test_CU.vcd");
-  $dumpvars(0, opcode,alu_op,jump,beq,bne,mem_read,mem_write,
-    alu_src,reg_dst,mem_to_reg,reg_write);
+  $dumpfile("./Waveforms/test_ALU_Control.vcd");
+  $dumpvars(0,ALU_Cnt,ALUOp,Opcode);
 
-   opcode=4'd0;
-
-   #20 begin
-   opcode=4'd0;
-   end
-
-   #30 begin
-   opcode=4'd1;
-   end
-
-   #40 begin
-   opcode=4'd2;
-   end
 
    #50 begin
-   opcode=4'd3;
+   {ALUOp,Opcode}=6'b10xxxx;
    end
 
    #60 begin
-   opcode=4'd4;
+   {ALUOp,Opcode}=6'b01xxxx;
    end
 
    #70 begin
-   opcode=4'd5;
+   {ALUOp,Opcode}=6'b10xxxx;
    end
 
    #80 begin
-   opcode=4'd6;
+   {ALUOp,Opcode}=6'b000010;
    end
 
    #90 begin
-   opcode=4'd7;
+   {ALUOp,Opcode}=6'b000011;
    end
 
    #100 begin
-   opcode=4'd8;
+   {ALUOp,Opcode}=6'b000100;
    end
 
    #110 begin
-   opcode=4'd9;
+   {ALUOp,Opcode}=6'b000101;
    end
 
    #120 begin
-   opcode=4'd11;
+   {ALUOp,Opcode}=6'b000110;
    end
 
    #130 begin
-   opcode=4'd12;
+   {ALUOp,Opcode}=6'b000111;
    end
 
    #140 begin
-   opcode=3'd13;
+   {ALUOp,Opcode}=6'b001000;
+   end
+
+   #150 begin
+   {ALUOp,Opcode}=6'b001001;
    end
 
    `simulation_time;
