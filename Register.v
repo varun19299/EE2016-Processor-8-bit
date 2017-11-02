@@ -36,10 +36,7 @@ module GPRs( //general purpose register
  //reg [2:0] i;
  initial begin
   for(i=0;i<8;i=i+1)
-   reg_array[i] <= 7'd0;
-   if (i==4) begin
-      reg_array[i]<=7'd3;
-   end
+   reg_array[i] <= 8'd0;
  end
 
  initial

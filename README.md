@@ -32,9 +32,12 @@ default: add
 
 ### The Instruction set of the RISC processor:
 
+_Note: rs1, rs2, ws1 refer to register values. We have defaulted all of them to zero initially._
+
 #### A. Memory Access Instructions
 1. Load Word:  (OP 0000)
                LD ws, offset(rs1) ws:=Mem16[rs1 + offset]
+
 2. Store Word: (OP 0001)
                ST rs2, offset(rs1) Mem16[rs1 + offset]=rs2
 

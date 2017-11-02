@@ -18,7 +18,7 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
 	memory[0] = 00000001
 	memory[1] = 00000110
 	memory[2] = 00000000
-	memory[3] = 00000011
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -39,8 +39,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                   55
 	memory[0] = 00000001
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -50,7 +50,7 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
 	reg[0] = 00000001
 	reg[1] = 00000110
 	reg[2] = 00000111
-	reg[3] = 00000011
+	reg[3] = 00000010
 	reg[4] = 00000000
 	reg[5] = 00000000
 	reg[6] = 00000000
@@ -59,8 +59,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                   75
 	memory[0] = 00000001
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -70,7 +70,7 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
 	reg[0] = 00000001
 	reg[1] = 00000110
 	reg[2] = 00000111
-	reg[3] = 00000011
+	reg[3] = 00000010
 	reg[4] = 00000000
 	reg[5] = 00000000
 	reg[6] = 00000000
@@ -79,8 +79,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                   95
 	memory[0] = 00000001
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -90,7 +90,7 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
 	reg[0] = 00000001
 	reg[1] = 00000110
 	reg[2] = 00000111
-	reg[3] = 00000011
+	reg[3] = 00000010
 	reg[4] = 00000000
 	reg[5] = 00000000
 	reg[6] = 00000000
@@ -99,8 +99,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  115
 	memory[0] = 00000001
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -110,7 +110,7 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
 	reg[0] = 00000001
 	reg[1] = 00000110
 	reg[2] = 00000111
-	reg[3] = 00000011
+	reg[3] = 00000010
 	reg[4] = 00000000
 	reg[5] = 00000000
 	reg[6] = 00000000
@@ -119,8 +119,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  135
 	memory[0] = 00000001
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -130,7 +130,7 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
 	reg[0] = 00000001
 	reg[1] = 00000110
 	reg[2] = 00000111
-	reg[3] = 00000011
+	reg[3] = 00000010
 	reg[4] = 00000000
 	reg[5] = 00000000
 	reg[6] = 00000000
@@ -144,7 +144,7 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
 	reg[0] = 00000110
 	reg[1] = 00000110
 	reg[2] = 00000111
-	reg[3] = 00000011
+	reg[3] = 00000010
 	reg[4] = 00000000
 	reg[5] = 00000000
 	reg[6] = 00000000
@@ -153,8 +153,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  175
 	memory[0] = 00000001
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -175,8 +175,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  215
 	memory[0] = 00000110
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -195,8 +195,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  235
 	memory[0] = 00000110
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -215,8 +215,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  255
 	memory[0] = 00000110
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -235,8 +235,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  275
 	memory[0] = 00000110
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000
@@ -255,8 +255,8 @@ WARNING: ./DMEM.v:35: $readmemb: Standard inconsistency, following 1364-2005.
           4time =                  295
 	memory[0] = 00000110
 	memory[1] = 00000110
-	memory[2] = 00000000
-	memory[3] = 00000111
+	memory[2] = 00000111
+	memory[3] = 00000010
 	memory[4] = 00000000
 	memory[5] = 00000000
 	memory[6] = 00000000

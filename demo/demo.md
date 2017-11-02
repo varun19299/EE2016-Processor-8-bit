@@ -35,3 +35,8 @@ ________
 0000_0110_1100_0011 // load R3 <- Mem(R3 + 3)
 0010_0000_0101_0000 // Add R2 <- R0 + R1
 0001_0110_1000_0000 // Store Mem(R3 + 0) <- R2
+
+Here, R1,R2, R3 are initially zero.
+Mem[3] contains 2.
+Mem[1], Mem[0] contains the numbers we wish to add.
+Hence, Mem[2]=Mem[1]+Mem[0].
