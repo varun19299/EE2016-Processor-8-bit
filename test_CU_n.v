@@ -15,17 +15,18 @@ module test_CU;
  wire [7:0] alu_result;
  wire [2:0] state;
  wire hold;
+ wire [3:0] opcode;
 
  // Instantiate the Unit Under Test (UUT)
  CU uut (
-  clk,reset,pc_out,alu_result,state,hold
+  clk,reset,pc_out,alu_result,state,hold,opcode
  );
 
  initial
   begin
   reset=1;
   $dumpfile("./Waveforms/test_CU_n.vcd");
-  $dumpvars(0, clk,reset,pc_out,alu_result,state,hold);
+  $dumpvars(0, clk,reset,pc_out,alu_result,state,hold,opcode);
 
    clk <=0;
    `simulation_time;

@@ -81,7 +81,7 @@ def assemble(command):
         imm_2=imm_string[3:] #3 from LSB
         instruction=opcode+imm_1+ra+rb+imm_2
 
-    elif l_command[0]=='load':
+    elif l_command[0]=='lw':
         opcode='1011'
         imm_string='{0:06b}'.format(int(l_command[3]))
         ra='{0:03b}'.format(int(l_command[2][1:]))
@@ -126,8 +126,8 @@ def compile(source=sys.argv[1], destination=sys.argv[2]):
           lines=a.read().splitlines()
           print (lines)
           for line in lines:
-              instruction=assemble(line)
-              b.write(instruction+'\n')
+              w_inst=assemble(line)
+              b.write(w_inst+'\n')
 
     except IOError as e:
       print ('Operation failed: %s' % e.strerror)

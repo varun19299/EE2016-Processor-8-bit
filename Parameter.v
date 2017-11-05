@@ -12,6 +12,6 @@
 `define filename "./demo/1_11_17_16_44.o"
 `define simulation_time #300
 `define data_file "./demo/data_2.txt"
-`define program_file "./demo/assemble/b.txt"
+`define program_file "./test/a_prog.txt"
 `define pc_length 8 //length of program counter
 `endif

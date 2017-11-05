@@ -19,7 +19,8 @@ module CU(
  output[15:0] pc_out,
  output [7:0] alu_result,
  output reg [2:0] state,
- output reg hold);
+ output reg hold,
+ output [3:0] opcode);
 
 //for PC
 reg [7:0] pc_current;
@@ -55,7 +56,7 @@ reg mem_read;
 wire [7:0] mem_read_data;
 
 //for CU
-reg [3:0] opcode;
+//reg [3:0] opcode;
 //reg [2:0] state;
 reg [5:0] imm;
 
@@ -69,6 +70,8 @@ ALU alu_unit(a,b,alu_control,result,zero);
 
 Data_Memory DM(clk,mem_access_addr,mem_write_data,mem_write_en,mem_read,mem_read_data);
 
+assign opcode = instruction[15:12];
+
 initial begin
 pc_current=0;
 hold=0;
@@ -77,7 +80,7 @@ end
 
 always @(posedge clk)
 begin
-opcode = instruction[15:12];
+
 
 case(opcode)
 4'b0000: begin      //ALU direct data processing
@@ -138,13 +141,14 @@ end
     WR=1;
     rd_data=result;
     state=state+1;
+
+
   end
   3'b011:
   begin        //one cycle for latency
     WR=0;
     state=0;
     hold=0;
-
   end
   endcase
 end
@@ -168,19 +172,21 @@ end
     RA=0;
     mem_read=1;
     mem_access_addr=ra_data+{2'b00,imm};
-    rd=mem_read_data;
     state=state+1;
   end
   3'b010: begin        //write to register rd
     WR=1;
+    rd_data=mem_read_data;
     mem_read=0;
     state=state+1;
+
   end
   3'b011:
   begin        //one cycle for latency
     WR=0;
     state=0;
     hold=0;
+
   end
   endcase
 end
@@ -262,7 +268,7 @@ end
   3'b001: begin
   hold=0;
   jump=0;
-  state=state+1;
+  state=0;
   end
   endcase
 end

@@ -1,5 +1,6 @@
 addi R3 R1 5
-addi R4 R2 5
+addi R4 R2 6
 lw R1 R2 0
-lw R2 R2 1
+lw R2 R6 1
+add R3 R2 R1
 eop

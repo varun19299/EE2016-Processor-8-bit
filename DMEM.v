@@ -56,7 +56,7 @@ always @(posedge clk) begin
   if (mem_write_en)
    memory[ram_addr] <= mem_write_data;
   else if (mem_read)
-  mem_read_data = (mem_read==1'b1) ? memory[ram_addr]: 8'd0;
+  mem_read_data <= memory[ram_addr];
 end
 
 
