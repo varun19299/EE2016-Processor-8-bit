@@ -1,0 +1,5 @@
+addi R3 R1 5
+addi R4 R2 5
+lw R1 R2 0
+lw R2 R2 1
+eop

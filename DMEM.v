@@ -23,7 +23,7 @@ module Data_Memory(
  input     mem_write_en,
  input mem_read,
  // read port
- output [7:0]   mem_read_data
+ output reg [7:0]   mem_read_data
 );
 
 reg [`col - 1:0] memory [`row_d - 1:0];   //registers
@@ -55,7 +55,9 @@ end
 always @(posedge clk) begin
   if (mem_write_en)
    memory[ram_addr] <= mem_write_data;
+  else if (mem_read)
+  mem_read_data = (mem_read==1'b1) ? memory[ram_addr]: 8'd0;
 end
-assign mem_read_data = (mem_read==1'b1) ? memory[ram_addr]: 8'd0;
+
 
 endmodule

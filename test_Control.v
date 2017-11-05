@@ -4,20 +4,25 @@
 Testbench for RISC module
 */
 `include "Parameter.v"
-`include "RISC.v"
+`include "Control.v"
 
 module test_Risc_8_bit;
 
  // Inputs
  reg clk;
+ wire [15:0] pc_out;
+ wire [7:0] alu_result;
 
  // Instantiate the Unit Under Test (UUT)
- Risc_8_bit uut (
-  .clk(clk)
+ CU uut (
+  clk,pc_out,alu_result
  );
 
  initial
   begin
+  $dumpfile("./Waveforms/test_Control.vcd");
+  $dumpvars(0, clk,pc_out,alu_result);
+
    clk <=0;
    `simulation_time;
    $finish;
