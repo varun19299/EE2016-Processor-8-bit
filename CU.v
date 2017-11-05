@@ -86,6 +86,7 @@ case(opcode)
 4'b0000: begin      //ALU direct data processing
   //hold=1;
   rd=instruction[11:9];
+  $display("CU",rd);
   ra=instruction[8:6];
   rb=instruction[5:3];
   alu_control=instruction[2:0];
@@ -101,17 +102,22 @@ case(opcode)
     RA=0;
     a=ra_data;
     b=rb_data;
+    state=state+1;
+  end
+  3'b010: begin      //allow ALU to process
     rd_data=result;
+    $display("CU rd data",rd_data);
     state=state+1;
-  end
-  3'b010: begin        //write to register
     WR=1;
-    state=state+1;
   end
-  3'b011: begin
+  3'b011: begin        //write to register
+    state=state+1;
+    hold=0;
+  end
+  3'b100: begin
     WR=0;
     state=0;
-    hold=0;
+    hold=1;
   end
   endcase
 end
@@ -138,17 +144,20 @@ end
     state=state+1;
   end
   3'b010: begin        //write to register
-    WR=1;
     rd_data=result;
     state=state+1;
-
-
+    WR=1;
   end
-  3'b011:
+  3'b011: begin        //write to register
+
+    state=state+1;
+    hold=0;
+  end
+  3'b100:
   begin        //one cycle for latency
     WR=0;
     state=0;
-    hold=0;
+    hold=1;
   end
   endcase
 end
@@ -170,23 +179,28 @@ end
   end
   3'b001: begin        //read from memory
     RA=0;
-    mem_read=1;
     mem_access_addr=ra_data+{2'b00,imm};
     state=state+1;
   end
-  3'b010: begin        //write to register rd
-    WR=1;
+  3'b010: begin        //read from memory
+    mem_read=1;
+    state=state+1;
+  end
+  3'b011: begin        //write to register rd
     rd_data=mem_read_data;
     mem_read=0;
     state=state+1;
-
   end
-  3'b011:
+  3'b100: begin        //write to register rd
+    WR=1;
+    state=state+1;
+    hold=0;
+  end
+  3'b101:
   begin        //one cycle for latency
     WR=0;
     state=0;
-    hold=0;
-
+    hold=1;
   end
   endcase
 end
@@ -211,11 +225,12 @@ end
     mem_write_data=rb_data;
     mem_access_addr=ra+{2'b00,imm};
     state=state+1;
+    hold=0;
   end
   3'b010: begin        //latency
     mem_write=0;
     state=0;
-    hold=0;
+    hold=1;
   end
   endcase
 
@@ -247,11 +262,12 @@ end
     else
       branch=0;
     state=state+1;
+    hold=0;
   end
   3'b011: begin     //release all holds
     branch=0;
     state=0;
-    hold=0;
+    hold=1;
   end
 endcase
 
@@ -260,13 +276,13 @@ end
 4'b0010: begin
   case(state)
   3'b000: begin
-  hold=1;
+  hold=0;
   {jump,branch,mem_write,alu_src,mem_to_reg,reg_write}=6'b100000;
-  jump_line=instruction[6:0]*2;
+  jump_line=instruction[6:0];
   state=state+1;
   end
   3'b001: begin
-  hold=0;
+  hold=1;
   jump=0;
   state=0;
   end

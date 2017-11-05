@@ -47,26 +47,30 @@ module GPRs( //general purpose register
    $fclose(f);
   end
 
- always @ (posedge clk ) begin
+ always @(posedge clk) begin
  //output registers
- $monitor(f,"time = %d\n", $time,
- "\treg[0] = %b\n", reg_array[0],
- "\treg[1] = %b\n", reg_array[1],
- "\treg[2] = %b\n", reg_array[2],
- "\treg[3] = %b\n", reg_array[3],
- "\treg[4] = %b\n", reg_array[4],
- "\treg[5] = %b\n", reg_array[5],
- "\treg[6] = %b\n", reg_array[6],
- "\treg[7] = %b\n", reg_array[7]);
+
 
    if(WR) begin
     reg_array[rd] <= rd_data;
+    $display(rd);
+    $display(rd_data);
    end
    else if(RA) begin
     ra_data = reg_array[ra];
     rb_data = reg_array[rb];
 
    end
+
+   $monitor(f,"time = %d\n", $time,
+   "\treg[0] = %b\n", reg_array[0],
+   "\treg[1] = %b\n", reg_array[1],
+   "\treg[2] = %b\n", reg_array[2],
+   "\treg[3] = %b\n", reg_array[3],
+   "\treg[4] = %b\n", reg_array[4],
+   "\treg[5] = %b\n", reg_array[5],
+   "\treg[6] = %b\n", reg_array[6],
+   "\treg[7] = %b\n", reg_array[7]);
  end
 
 endmodule

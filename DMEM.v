@@ -20,7 +20,7 @@ module Data_Memory(
 
  // write port
  input [7:0]   mem_write_data,
- input     mem_write_en,
+ input mem_write_en,
  input mem_read,
  // read port
  output reg [7:0]   mem_read_data
@@ -55,7 +55,7 @@ end
 always @(posedge clk) begin
   if (mem_write_en)
    memory[ram_addr] <= mem_write_data;
-  else if (mem_read)
+  if (mem_read)
   mem_read_data <= memory[ram_addr];
 end
 
