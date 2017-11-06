@@ -243,7 +243,7 @@ end
 
 end
 
-4'b1000: begin
+4'b1000: begin      //branch if equal
   //hold=1;
   ra=instruction[8:6];
   rb=instruction[5:3];
@@ -280,7 +280,7 @@ endcase
 
 end
 
-4'b0010: begin
+4'b0010: begin        //jump
   case(state)
   3'b000: begin
   hold=0;

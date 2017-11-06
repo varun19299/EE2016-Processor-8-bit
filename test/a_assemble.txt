@@ -4,5 +4,6 @@ lw R1 R2 0
 lw R2 R6 2
 add R3 R2 R1
 sw R4 R6 6
+beq R7 R6 2
 j 1
 eop
