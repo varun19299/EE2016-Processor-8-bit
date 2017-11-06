@@ -43,28 +43,28 @@ _Note: rs1, rs2, ws1 refer to register values. We have defaulted all of them to 
 
 #### B. Data Processing Instructions
 
-1. Add:       (OP 0002)
+1. Add:       (OP 0000, func 000)
                ADD ws, rs1, rs2 ws:=rs1 + rs2
 
-2. Subtract:   (OP 0003)
+2. Subtract:   (OP 0000, func 001)
                SUB ws, rs1, rs2 ws:=rs1 – rs2
 
-3. Invert (1‘s complement):    (OP 0004)
+3. Invert (1‘s complement):    (OP 0000, func 010)
                INV ws, rs1 ws:=!rs1
 
-4. Logical Shift Left:        (OP 0005)
+4. Logical Shift Left:        (OP 0000, func 011)
                LSL ws, rs1, rs2 ws:=rs1 << rs2
 
-5. Logical Shift Right:       (OP 0006)
+5. Logical Shift Right:       (OP 0000, func 100)
                LSR ws, rs1, rs2 ws:=rs1 >> rs2
 
-6. Bitwise AND:               (OP 0007)
+6. Bitwise AND:               (OP 0000, func 101)
                AND ws, rs1, rs2 ws:=rs1 • rs2
 
-7. Bitwise OR:                (OP 0008)
+7. Bitwise OR:                (OP 0000, func 110)
               OR ws, rs1, rs2 ws:=rs1 | rs2
 
-8. Set on Less Than:          (OP 0009)
+8. Set on Less Than:          (OP 0000, func 111)
              SLT ws, rs1, rs2 ws:=1 if rs1 < rs2; ws:=0 if rs1 ≥ rs2
 
 #### C. Control Flow Instructions
@@ -136,7 +136,6 @@ _________
 
 9. reg_write: Is an entry in the register file (pointed to by rd) supposed to get an updated value in this instruction?  
 
-10. alu_op: Type of instruction. 00 for data processing, 01 for control flow, 10 for memory access.
 
 This reflects in PFCL Design, and ALU control Design.
 _________

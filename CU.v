@@ -86,7 +86,6 @@ case(opcode)
 4'b0000: begin      //ALU direct data processing
   //hold=1;
   rd=instruction[11:9];
-  $display("CU",rd);
   ra=instruction[8:6];
   rb=instruction[5:3];
   alu_control=instruction[2:0];
@@ -106,7 +105,6 @@ case(opcode)
   end
   3'b010: begin      //allow ALU to process
     rd_data=result;
-    $display("CU rd data",rd_data);
     state=state+1;
     WR=1;
   end
@@ -208,7 +206,7 @@ end
 4'b1111: begin       //store value
   //hold=1;
   ra=instruction[8:6];
-  rd=instruction[5:3];
+  rb=instruction[5:3];
   imm={instruction[11:9],instruction[2:0]};
   alu_control=0;
   {jump,branch,mem_write,alu_src,mem_to_reg,reg_write}=6'b001100;
@@ -220,15 +218,24 @@ end
     state=state+1;
   end
   3'b001: begin        //write to data mem
+    mem_access_addr=ra_data+{2'b00,imm};
+    $display("memory access",mem_access_addr);
+    state=state+1;
+  end
+  3'b010: begin        //latency
     RA=0;
-    mem_write=1;
     mem_write_data=rb_data;
-    mem_access_addr=ra+{2'b00,imm};
+    $display("data",rb_data);
+    $display("source",rb);
+    mem_write_en=1;
+    state=state+1;
+  end
+  3'b011: begin        //latency
     state=state+1;
     hold=0;
   end
-  3'b010: begin        //latency
-    mem_write=0;
+  3'b100: begin        //latency
+    mem_write_en=0;
     state=0;
     hold=1;
   end

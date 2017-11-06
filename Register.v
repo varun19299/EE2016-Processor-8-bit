@@ -53,8 +53,6 @@ module GPRs( //general purpose register
 
    if(WR) begin
     reg_array[rd] <= rd_data;
-    $display(rd);
-    $display(rd_data);
    end
    else if(RA) begin
     ra_data = reg_array[ra];

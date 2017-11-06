@@ -53,8 +53,10 @@ initial
 end
 
 always @(posedge clk) begin
-  if (mem_write_en)
+  if (mem_write_en) begin
    memory[ram_addr] <= mem_write_data;
+   $display("In memory",ram_addr);
+   end
   if (mem_read)
   mem_read_data <= memory[ram_addr];
 end

@@ -32,11 +32,9 @@ if (hold==1'b0) begin
   d_out<=d_in;        //EOP
   else
   d_out <= d_in + 1;
-  $monitor("updated");
 end
 
 else
 d_out<=d_in;
-$monitor("held");
 end
 endmodule
