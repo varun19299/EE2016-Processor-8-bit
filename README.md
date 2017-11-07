@@ -34,38 +34,41 @@ default: add
 
 _Note: rs1, rs2, ws1 refer to register values. We have defaulted all of them to zero initially._
 
-#### A. Memory Access Instructions
-1. Load Word:  (OP 0000)
-               LD ws, offset(rs1) ws:=Mem16[rs1 + offset]
+#### A. Immediate Access Instructions (branch is written seperately below)
+1. Load Word:  (OP 1011)
+               lw Rd Ra immem                 Rd_value<=Mem[Ra_value +immem ]
 
-2. Store Word: (OP 0001)
-               ST rs2, offset(rs1) Mem16[rs1 + offset]=rs2
+2. Store Word: (OP 1111)
+               sw Rd Ra immem                 Mem[Ra_value + immem]<=Rd_value
+
+3. Add Immediate: (OP 0100)  
+    add Rd Ra immem      Rd_value<=Ra_value+immem
 
 #### B. Data Processing Instructions
 
 1. Add:       (OP 0000, func 000)
-               ADD ws, rs1, rs2 ws:=rs1 + rs2
+               add Rd Ra Rb   Rd<=Ra+Rb
 
 2. Subtract:   (OP 0000, func 001)
-               SUB ws, rs1, rs2 ws:=rs1 – rs2
+                sub Rd Ra Rb   Rd<=Ra-Rb
 
 3. Invert (1‘s complement):    (OP 0000, func 010)
-               INV ws, rs1 ws:=!rs1
+               inv Rd Ra Rb   Rd<=~Ra
 
 4. Logical Shift Left:        (OP 0000, func 011)
-               LSL ws, rs1, rs2 ws:=rs1 << rs2
+               lsl Rd Ra Rb   Rd<=Ra<<Rb
 
 5. Logical Shift Right:       (OP 0000, func 100)
-               LSR ws, rs1, rs2 ws:=rs1 >> rs2
+               lsr Rd Ra Rb   Rd<=Ra>>Rb
 
 6. Bitwise AND:               (OP 0000, func 101)
-               AND ws, rs1, rs2 ws:=rs1 • rs2
+              and Rd Ra Rb   Rd<=Ra & Rb
 
 7. Bitwise OR:                (OP 0000, func 110)
-              OR ws, rs1, rs2 ws:=rs1 | rs2
+              or Rd Ra Rb   Rd<=Ra || Rb
 
 8. Set on Less Than:          (OP 0000, func 111)
-             SLT ws, rs1, rs2 ws:=1 if rs1 < rs2; ws:=0 if rs1 ≥ rs2
+             cmp Rd Ra Rb   Rd=(Ra<Rb)?1:0
 
 #### C. Control Flow Instructions
 1. Branch on Equal:          (OP 0011)
@@ -107,11 +110,13 @@ _________
 
 ### Processor Control Unit Design:
 
-![PFCL](./PCU_Design.png)
+![PFCL](./opcode.png)
 
-### ALU Control Unit Design:
+### instruction Format:
 
-![AUCL](./ALU_Control_Unit.png)
+_We have extended a few on the same lines._
+
+![format](./instr.png)
 
 _________
 
@@ -138,6 +143,14 @@ _________
 
 
 This reflects in PFCL Design, and ALU control Design.
+
+_________
+
+### Assembler Syntax
+
+Run:
+
+> python assembler.py source destination
 _________
 
 ### Content of Text Files:
