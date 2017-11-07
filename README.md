@@ -19,6 +19,7 @@ _________
 ### ALU Opcodes:
 
 3'b000: {carry,result} = a + b; // add  
+R0 is for carry.
 3'b001: {borrow,result} = a - b; // sub  
 3'b010: result = ~a;        // Invert  
 3'b011: result = a<<b;     //Left shift by b bits  
@@ -71,7 +72,7 @@ _Note: rs1, rs2, ws1 refer to register values. We have defaulted all of them to 
              cmp Rd Ra Rb   Rd=(Ra<Rb)?1:0
 
 #### C. Control Flow Instructions
-1. Branch on Equal:          (OP 0011)
+1. Branch on Equal:          (OP 1000)
                BEQ rs1, rs2, offset
                Branch to (PC + 2 + (offset << 1)) when rs1 = rs2
 
@@ -79,7 +80,7 @@ _Note: rs1, rs2, ws1 refer to register values. We have defaulted all of them to 
               BNE rs1, rs2, offset
               Branch to (PC + 2 + (offset << 1)) when rs1 != rs2
 
-3. Jump: JMP offset Jump to {PC [15:13], (offset << 1)}    (OP 0013)
+3. Jump: JMP offset Jump to {PC [15:13], (offset << 1)}    (OP 0010)
 
 --------
 
