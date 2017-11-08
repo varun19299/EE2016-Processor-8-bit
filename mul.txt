@@ -3,6 +3,6 @@ lw R2 R7 2
 add R5 R1 R5
 add R4 R0 R4
 addi R3 R3 1
-beq R3 R2 8
+beq R3 R2 7
 j 1
 eop

@@ -10,8 +10,8 @@
 //We only use 8 data. Do not change this number.
 // Please only change the value of each data inside test.data file. Total number is fixed at 8.
 `define filename "./demo/1_11_17_16_44.o"
-`define simulation_time #450
+`define simulation_time #3000
 `define data_file "./demo/data_2.txt"
-`define program_file "./test/a_prog.txt"
+`define program_file "./test/factorial_prog.txt"
 `define pc_length 8 //length of program counter
 `endif

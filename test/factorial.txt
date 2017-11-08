@@ -1,0 +1,15 @@
+lw R1 R7 1
+lw R6 R7 1
+lw R2 R7 2
+add R3 R7 R7
+add R5 R6 R5
+add R4 R0 R4
+addi R3 R3 1
+beq R3 R2 9
+j 4
+add R6 R7 R5
+add R5 R7 R7
+addi R2 R2 1
+beq R2 R1 14
+j 3
+eop

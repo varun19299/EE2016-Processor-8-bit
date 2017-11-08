@@ -24,10 +24,10 @@ always @(clk) begin
 if (hold==1'b0) begin
   if (reset)
   d_out <= 8'b00000000;
-  else if (jump)
-  d_out<=jump_line*2; //jump_line is 7 bits length
-  else if (branch)
-  d_out<=d_in + {2'b00,branch_immem}; //immem is max 6 bits long
+  else if (jump==1'b1)
+  d_out<=jump_line; //jump_line is 7 bits length
+  else if (branch==1'b1)
+  d_out<={2'b00,branch_immem}; //immem is max 6 bits long
   else if (d_in== `col_memory)
   d_out<=d_in;        //EOP
   else

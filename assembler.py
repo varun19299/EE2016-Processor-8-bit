@@ -126,7 +126,10 @@ def compile(source=sys.argv[1], destination=sys.argv[2]):
           lines=a.read().splitlines()
           print (lines)
           for line in lines:
-              w_inst=assemble(line)
+              try:
+                  w_inst=assemble(line)
+              except:
+                  print (line)
               b.write(w_inst+'\n')
 
     except IOError as e:

@@ -6,7 +6,9 @@ _Done as a part of semester project for EE2016_
 
 Architecture based on Harvard RISC Architecture.
 
-![Harvard Architecture](./Harvard_architecture.png)
+Block Diagram
+
+![*Block Diagram*](./Block_diag_8_bit.svg)
 
 _________
 ### General Structure:
@@ -33,7 +35,7 @@ default: add
 
 ### The Instruction set of the RISC processor:
 
-_Note: rs1, rs2, ws1 refer to register values. We have defaulted all of them to zero initially._
+_Note: Ra, Rb, Rd refer to register values. We have set all of them to zero initially._
 
 #### A. Immediate Access Instructions (branch is written seperately below)
 1. Load Word:  (OP 1011)

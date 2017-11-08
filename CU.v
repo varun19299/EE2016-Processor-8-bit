@@ -20,7 +20,8 @@ module CU(
  output [7:0] alu_result,
  output reg [2:0] state,
  output reg hold,
- output [3:0] opcode);
+ output [3:0] opcode,
+ output zero);
 
 //for PC
 reg [7:0] pc_current;
@@ -46,7 +47,8 @@ wire [7:0] rb_data;
 reg [2:0] alu_control;
 reg [7:0] a,b;
 wire [7:0] result;
-wire zero;
+//wire zero;
+wire carry;
 
 //for DMEM
 reg [7:0] mem_access_addr;
@@ -66,7 +68,7 @@ Instruction_Memory IM(.pc(pc_current),.instruction(instruction));
 
 GPRs REG(clk,WR, RA,rd,rd_data,ra,ra_data,rb,rb_data);
 
-ALU alu_unit(a,b,alu_control,result,zero);
+ALU alu_unit(a,b,alu_control,result,zero,carry);
 
 Data_Memory DM(clk,mem_access_addr,mem_write_data,mem_write_en,mem_read,mem_read_data);
 
@@ -98,21 +100,35 @@ case(opcode)
     state=state+1;
   end
   3'b001: begin      //allow ALU to process
+    state=state+1;
+  end
+  3'b010: begin      //allow ALU to process
     RA=0;
     a=ra_data;
     b=rb_data;
     state=state+1;
   end
-  3'b010: begin      //allow ALU to process
+  3'b011: begin      //allow ALU to process
     rd_data=result;
     state=state+1;
     WR=1;
   end
-  3'b011: begin        //write to register
+  3'b100: begin        //write to register
+    WR=1;
+    state=state+1;
+  end
+  3'b101: begin
+    WR=0;
+    rd=3'd0;
+    state=state+1;
+  end
+  3'b110: begin        //write to register
+    //WR=1;
+    rd_data={7'd0,carry};
     state=state+1;
     hold=0;
   end
-  3'b100: begin
+  3'b111: begin        //write to register
     WR=0;
     state=0;
     hold=1;
@@ -136,22 +152,31 @@ end
     state=state+1;
   end
   3'b001: begin        //process with ALU
+    state=state+1;
+  end
+  3'b010: begin        //write to register
     RA=0;
     a=ra_data;
     b={2'b00,imm};
     state=state+1;
   end
-  3'b010: begin        //write to register
-    rd_data=result;
+  3'b011: begin        //process with ALU
     state=state+1;
-    WR=1;
   end
-  3'b011: begin        //write to register
-
+  3'b100: begin        //write to register
+    rd_data=result;
+    $display("result",result);
+    state=state+1;
+  end
+  3'b101: begin        //write to register
+    WR=1;
+    state=state+1;
+  end
+  3'b110: begin        //write to register
     state=state+1;
     hold=0;
   end
-  3'b100:
+  3'b111:
   begin        //one cycle for latency
     WR=0;
     state=0;
@@ -219,14 +244,11 @@ end
   end
   3'b001: begin        //write to data mem
     mem_access_addr=ra_data+{2'b00,imm};
-    $display("memory access",mem_access_addr);
     state=state+1;
   end
   3'b010: begin        //latency
     RA=0;
     mem_write_data=rb_data;
-    $display("data",rb_data);
-    $display("source",rb);
     mem_write_en=1;
     state=state+1;
   end
@@ -248,7 +270,7 @@ end
   ra=instruction[8:6];
   rb=instruction[5:3];
   imm={instruction[11:9],instruction[2:0]};
-  alu_control=3'b111;
+  alu_control=3'b001;
   {jump,branch,mem_write,alu_src,mem_to_reg,reg_write}=6'b010000;
 
   case(state)
@@ -258,24 +280,33 @@ end
     state=state+1;
   end
   3'b001: begin      //allow ALU to process
+    state=state+1;
+
+  end
+  3'b010: begin      //allow ALU to process
     RA=0;
     a=ra_data;
     b=rb_data;
     state=state+1;
   end
-  3'b010: begin        //update pc
-    if (zero)
+  3'b011: begin        //update pc
+    if (zero==1'b1) begin
       branch_immem=imm;
+      end
     else
       branch=0;
     state=state+1;
     hold=0;
   end
-  3'b011: begin     //release all holds
-    branch=0;
+  3'b100: begin     //release all holds
     state=0;
     hold=1;
   end
+/*  3'b101: begin     //release all holds
+    state=0;
+    hold=1;
+    branch=0;
+  end */
 endcase
 
 end
