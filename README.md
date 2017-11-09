@@ -119,6 +119,10 @@ _________
 
 ![PFCL](./opcode.png)
 
+Changes in jump (to any line).
+
+Inclusion of subi, bne, mov.
+
 ### instruction Format:
 
 _We have extended a few on the same lines._

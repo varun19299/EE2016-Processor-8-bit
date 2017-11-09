@@ -1,0 +1,5 @@
+lw R1 R7 1
+lw R2 R7 2
+or R3 R1 R2
+sw R3 R7 3
+eop
