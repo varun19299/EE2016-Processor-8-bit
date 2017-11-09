@@ -108,6 +108,15 @@ def assemble(command):
         imm_2=imm_string[3:] #3 from LSB
         instruction=opcode+imm_1+ra+rb+imm_2
 
+    elif l_command[0]=='bne':
+        opcode='1001'
+        imm_string='{0:06b}'.format(int(l_command[3]))
+        ra='{0:03b}'.format(int(l_command[2][1:]))
+        rb='{0:03b}'.format(int(l_command[1][1:]))
+        imm_1=imm_string[:3] #3 from MSB
+        imm_2=imm_string[3:] #3 from LSB
+        instruction=opcode+imm_1+ra+rb+imm_2
+
     elif l_command[0]=='j':
         opcode='0010'
         addr='{0:07b}'.format(int(l_command[1]))

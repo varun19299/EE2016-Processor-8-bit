@@ -38,74 +38,78 @@ default: add
 _Note: Ra, Rb, Rd refer to register values. We have set all of them to zero initially._
 
 #### A. Immediate Access Instructions (branch is written seperately below)
-1. Load Word:  (OP 1011)
+1. Load Word:  (OP 1011)  
                lw Rd Ra immem                 Rd_value<=Mem[Ra_value +immem ]
 
 2. Store Word: (OP 1111)
                sw Rd Ra immem                 Mem[Ra_value + immem]<=Rd_value
 
 3. Add Immediate: (OP 0100)  
-    add Rd Ra immem      Rd_value<=Ra_value+immem
+    addi Rd Ra immem      Rd_value<=Ra_value+immem
+
+4. Subtract Immediate: (OP 0101)  
+    subi Rd Ra immem      Rd_value<=Ra_value-immem
 
 #### B. Data Processing Instructions
 
-1. Add:       (OP 0000, func 000)
+1. Add:       (OP 0000, func 000)  
                add Rd Ra Rb   Rd<=Ra+Rb
 
-2. Subtract:   (OP 0000, func 001)
+2. Subtract:   (OP 0000, func 001)  
                 sub Rd Ra Rb   Rd<=Ra-Rb
 
-3. Invert (1‘s complement):    (OP 0000, func 010)
+3. Invert (1‘s complement):    (OP 0000, func 010)  
                inv Rd Ra Rb   Rd<=~Ra
 
-4. Logical Shift Left:        (OP 0000, func 011)
+4. Logical Shift Left:        (OP 0000, func 011)  
                lsl Rd Ra Rb   Rd<=Ra<<Rb
 
-5. Logical Shift Right:       (OP 0000, func 100)
+5. Logical Shift Right:       (OP 0000, func 100)  
                lsr Rd Ra Rb   Rd<=Ra>>Rb
 
-6. Bitwise AND:               (OP 0000, func 101)
+6. Bitwise AND:               (OP 0000, func 101)  
               and Rd Ra Rb   Rd<=Ra & Rb
 
-7. Bitwise OR:                (OP 0000, func 110)
+7. Bitwise OR:                (OP 0000, func 110)  
               or Rd Ra Rb   Rd<=Ra || Rb
 
-8. Set on Less Than:          (OP 0000, func 111)
+8. Set on Less Than:          (OP 0000, func 111)  
              cmp Rd Ra Rb   Rd=(Ra<Rb)?1:0
 
 #### C. Control Flow Instructions
-1. Branch on Equal:          (OP 1000)
-               BEQ rs1, rs2, offset
-               Branch to (PC + 2 + (offset << 1)) when rs1 = rs2
+1. Branch on Equal:          (OP 1000)  
+               beq rb, ra, immem
+               Branch to immem when ra == rb
 
-2. Branch on Not Equal:      (OP 0012)
-              BNE rs1, rs2, offset
-              Branch to (PC + 2 + (offset << 1)) when rs1 != rs2
+2. Branch on Not Equal:      (OP 1001)  
+              bne rb, ra, immem
+              Branch to immem when ra != rb
 
-3. Jump: JMP offset Jump to {PC [15:13], (offset << 1)}    (OP 0010)
+3. Jump: to j_line   (OP 0010)  
+            j j_line;
 
 --------
 
 ### The Instruction Skeleton of the RISC processor:
 
-Memory Access: Load
+**Memory Access: Load**
 
   <4 Opcode>  <3 RS1> <3 WS>  <6 Offset>
 
-Memory Access: Store
+**Memory Access: Store**
 
   <4 Opcode>  <3 RS1> <3 RS2>  <6 Offset>
 
-Data Processing:
+**Data Processing:**
 
   <4 Opcode>  <3 RS1> <3 RS2>  <3 WS> <3 Neglect>
 
 
-Branch: (BNE and BEQ)
+**Branch: (BNE and BEQ)**
 
   <4 Opcode>  <3 RS1> <3 Rs2>  <6 Offset>
 
-Jump:
+**Jump:**
 
   <4 Opcode>  <12 Offset>
 

@@ -99,10 +99,10 @@ case(opcode)
     RA=1;
     state=state+1;
   end
-  3'b001: begin      //allow ALU to process
+  3'b001: begin      //latency
     state=state+1;
   end
-  3'b010: begin      //allow ALU to process
+  3'b010: begin      //set up ALU parameters
     RA=0;
     a=ra_data;
     b=rb_data;
@@ -128,7 +128,7 @@ case(opcode)
     state=state+1;
     hold=0;
   end
-  3'b111: begin        //write to register
+  3'b111: begin        //latency
     WR=0;
     state=0;
     hold=1;
@@ -151,10 +151,10 @@ end
     RA=1;
     state=state+1;
   end
-  3'b001: begin        //process with ALU
+  3'b001: begin        //buffer
     state=state+1;
   end
-  3'b010: begin        //write to register
+  3'b010: begin        //setup data
     RA=0;
     a=ra_data;
     b={2'b00,imm};
@@ -163,7 +163,7 @@ end
   3'b011: begin        //process with ALU
     state=state+1;
   end
-  3'b100: begin        //write to register
+  3'b100: begin        //begin write to register
     rd_data=result;
     $display("result",result);
     state=state+1;
@@ -185,6 +185,54 @@ end
   endcase
 end
 
+4'b0101:
+  begin      //subi rd<=ra+imm
+  //hold=1;
+  ra=instruction[8:6];
+  rd=instruction[5:3];
+  imm={instruction[11:9],instruction[2:0]};
+  alu_control=3'b001;
+  {jump,branch,mem_write,alu_src,mem_to_reg,reg_write}=6'b000001;
+
+  case(state)
+  3'b000: begin        //read ra, imem from Instructions
+    hold=1;
+    RA=1;
+    state=state+1;
+  end
+  3'b001: begin        //buffer
+    state=state+1;
+  end
+  3'b010: begin        //setup data
+    RA=0;
+    a=ra_data;
+    b={2'b00,imm};
+    state=state+1;
+  end
+  3'b011: begin        //process with ALU
+    state=state+1;
+  end
+  3'b100: begin        //begin write to register
+    rd_data=result;
+    $display("result",result);
+    state=state+1;
+  end
+  3'b101: begin        //write to register
+    WR=1;
+    state=state+1;
+  end
+  3'b110: begin        //write to register
+    state=state+1;
+    hold=0;
+  end
+  3'b111:
+  begin        //one cycle for latency
+    WR=0;
+    state=0;
+    hold=1;
+  end
+  endcase
+end
 
 4'b1011: begin      //load value.
 //  hold=1;
@@ -302,11 +350,47 @@ end
     state=0;
     hold=1;
   end
-/*  3'b101: begin     //release all holds
+endcase
+
+end
+
+4'b1001: begin      //branch if not equal
+  //hold=1;
+  ra=instruction[8:6];
+  rb=instruction[5:3];
+  imm={instruction[11:9],instruction[2:0]};
+  alu_control=3'b001;
+  {jump,branch,mem_write,alu_src,mem_to_reg,reg_write}=6'b010000;
+
+  case(state)
+  3'b000: begin      //read ra, rb from Instructions
+    hold=1;
+    RA=1;
+    state=state+1;
+  end
+  3'b001: begin      //allow ALU to process
+    state=state+1;
+
+  end
+  3'b010: begin      //allow ALU to process
+    RA=0;
+    a=ra_data;
+    b=rb_data;
+    state=state+1;
+  end
+  3'b011: begin        //update pc
+    if (zero==1'b0) begin
+      branch_immem=imm;
+      end
+    else
+      branch=0;
+    state=state+1;
+    hold=0;
+  end
+  3'b100: begin     //release all holds
     state=0;
     hold=1;
-    branch=0;
-  end */
+  end
 endcase
 
 end
