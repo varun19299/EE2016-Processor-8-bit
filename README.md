@@ -2,8 +2,9 @@
 
 **Author: Varun Sundar, EE16B068.**
 
-_Done as a part of semester project for EE2016_
+_Done as a part of semester project for EE2016 (Fall 2017)_
 
+This serves as both a documentation and a report for the project.
 Architecture based on Harvard RISC Architecture.
 
 Block Diagram
@@ -14,7 +15,7 @@ _________
 ### General Structure:
 
 * 8 bit processor.
-* 16 bit Program counter.
+* 8 bit Program counter.
 * 16 bit IMEM output.
 * 8 registers R0 to R7, of 8 bits each.
 _________
@@ -165,7 +166,7 @@ Changes in jump (to any line).
 
 Inclusion of subi, bne, mov.
 
-### instruction Format:
+### Instruction Format:
 
 _We have extended a few on the same lines._
 
@@ -235,3 +236,4 @@ _________
   > iverilog -o destination ./test_CU_n.v  
   > vvp destination  
   > // Modify relevant parameters in Parameter.v first  
+4. Change program count parameter to exceed beyond 16 instructions. Can support up to 256 lines of program code.
