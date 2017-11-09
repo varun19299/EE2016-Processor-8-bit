@@ -13,11 +13,42 @@ Block Diagram
 _________
 ### General Structure:
 
-* 8 bit processor,
-* 16 bit Program counter
-* 16 bit IMEM output
-* 8 bit regsiter, 8 numbers.
+* 8 bit processor.
+* 16 bit Program counter.
+* 16 bit IMEM output.
+* 8 registers R0 to R7, of 8 bits each.
 _________
+
+### Module Descriptions:
+
+1. #### Instruction memory
+This is be a combinational unit - it takes just the address bus (8 bit value) as input, and gives out a 16-bit value that is the instruction to be decoded. The address is provided by the Program Counter (PC).
+
+2. #### Program Counter
+8 bit register. Under normal operations, will always increment by 1 on every clock cycle, to access the next instruction. In case of a JUMP or BRANCH type of instruction, will go to the value specified by the output of the ALU or the immediate operand in the instruction.
+
+3. #### Register file
+This is a set of 8 registers, each storing an 8 bit value. There are 2 output values ra and rb, whose values are selected based on the instruction word, as in the instruction definitions given above. There is one port by which data can be written into one of the registers, with an enable signal to control whether or not to update the value.
+
+4. #### Data Memory
+This is a sequential / clocked unit. At any given cycle, you are either reading from it or writing to it, with the address given by the address bus. In case of a lw (load-word) or sw (store-word) instruction, the address is either immediate or the output of the ALU.
+
+5. #### Arithmetic and Logic Unit (ALU)
+The core of the processor - all the actual computations are performed here. As shown in the instruction set, operations such as addition, subtraction and logical operations are all done in this unit. Also, the output of the ALU is used as the address for certain memory related operations.
+
+6. #### Control unit
+The unit that actually makes the entire processor work as expected. The input to this is the instruction word, and the output is a set of control signals that decide, for example, whether the register file is to updated, what operation is to be done by the ALU, whether memory read or write is required etc.
+
+This has been implemented by generating the following control signals (not seen in the block diagram, for brevity):
+
+* **MemToReg**: does data being written into the register file come from memory or from output of the ALU
+* **MemWrite**: is the present operation going to write into memory?
+* **RegWrite**: is an entry in the register file (pointed to by rd) supposed to get an updated value in this instruction?
+* **ALUSrc**: is this an immediate operation, or a register operation?
+* **Branch**: If the current instruction is a branch, then use this signal as select for a multiplexer to feed the PC.
+* **Jump**: Control the PC input MUX and also the immediate operand for input to PC.
+_________
+
 ### ALU Opcodes:
 
 3'b000: {carry,result} = a + b; // add  
@@ -179,5 +210,14 @@ _________
 
 1. data.txt: contains register values. There are 8 such registers.
 2. ./test/: this folder contains the output of simulations. Stored in format date_time.o
-3. prog.txt: contains program to be executed.
-4. interpretation.txt: hardcoding of program.
+3. prog.txt: contains program to be executed. (Under relevant directories in test)
+
+_________
+
+### Implementation Notes:
+
+1. Cannot use $fmonitor in icarus verilog, may use it in xilinx.
+2. Run as :
+  > iverilog -o destination ./test_CU_n.v  
+  > vvp destination  
+  > // Modify relevant parameters in Parameter.v first  

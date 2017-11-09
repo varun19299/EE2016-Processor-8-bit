@@ -26,7 +26,7 @@ module test_CU;
  initial
   begin
   reset=1;
-  $dumpfile("./Waveforms/test_CU_n.vcd");
+  $dumpfile(`waveform_output);
   $dumpvars(0, clk,reset,pc_out,alu_result,state,hold,opcode,zero);
 
    clk <=0;
