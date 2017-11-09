@@ -416,6 +416,54 @@ end
   hold=1;
 end
 
+
+4'b0011: begin      //mov Ra Rb
+  //hold=1;
+  ra=instruction[11:9];
+  rd=instruction[8:6];
+  alu_control=0;
+  {jump,branch,mem_write,alu_src,mem_to_reg,reg_write}=6'b000001;
+
+  case(state)
+  3'b000: begin      //read ra from Instructions
+    hold=1;
+    RA=1;
+    state=state+1;
+  end
+  3'b001: begin      //latency
+    state=state+1;
+  end
+  3'b010: begin      //set up rd
+    RA=0;
+    rd_data=ra_data;
+    state=state+1;
+  end
+  3'b011: begin      //allow latency to process
+    state=state+1;
+    WR=1;
+  end
+  3'b100: begin        //write to register ra (0)
+    WR=0;
+    rd=ra;
+    rd_data=0;
+    state=state+1;
+  end
+  3'b101: begin
+    WR=1;
+    state=state+1;
+  end
+  3'b110: begin        //write to register
+    state=state+1;
+    hold=0;
+  end
+  3'b111: begin        //latency
+    WR=0;
+    state=0;
+    hold=1;
+  end
+  endcase
+end
+
 endcase
 
 pc_current=pc_next;

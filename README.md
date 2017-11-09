@@ -88,6 +88,13 @@ _Note: Ra, Rb, Rd refer to register values. We have set all of them to zero init
 3. Jump: to j_line   (OP 0010)  
             j j_line;
 
+4. Move: mov Ra Rb   (OP 0011)  
+        Rb <= Ra  
+        Ra<=0
+
+5. End of Program: eop (OP 0111)  
+        Holds pc.
+
 --------
 
 ### The Instruction Skeleton of the RISC processor:
@@ -112,6 +119,10 @@ _Note: Ra, Rb, Rd refer to register values. We have set all of them to zero init
 **Jump:**
 
   <4 Opcode>  <12 Offset>
+
+**MOV:**
+
+<4 Opcode> <3 Ra> <3 Rb>
 
 _________
 

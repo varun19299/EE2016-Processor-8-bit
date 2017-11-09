@@ -122,6 +122,12 @@ def assemble(command):
         addr='{0:07b}'.format(int(l_command[1]))
         instruction=opcode+'0'*5+addr
 
+    elif l_command[0]=='mov':
+        opcode='0011'
+        ra='{0:03b}'.format(int(l_command[1][1:]))
+        rb='{0:03b}'.format(int(l_command[2][1:]))
+        instruction=opcode+ra+rb+'0'*6
+
     elif l_command[0]=='eop':
         opcode='0111'
         instruction=opcode+'0'*12
