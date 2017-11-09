@@ -199,6 +199,19 @@ This reflects in PFCL Design, and ALU control Design.
 
 _________
 
+### Sample output
+
+* Program to find n factorial.
+* Code present at ./test/factorial.txt
+* Compiled code present at ./test/factorial_prog.txt
+* Output logs at ./test/factorial.o
+* Verilog vvp compilation at ./test/factorial
+* Sample waveform:
+
+![factorial waveform](./Waveforms/factorial.png)
+
+_________
+
 ### Assembler Syntax
 
 Run:
@@ -217,7 +230,8 @@ _________
 ### Implementation Notes:
 
 1. Cannot use $fmonitor in icarus verilog, may use it in xilinx.
-2. Run as :
+2. View waveforms in ./test/ or ./Waveform with gtkwave or scansion.
+3. Run as :
   > iverilog -o destination ./test_CU_n.v  
   > vvp destination  
   > // Modify relevant parameters in Parameter.v first  
